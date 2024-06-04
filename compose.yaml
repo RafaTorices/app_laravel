@@ -1,9 +1,9 @@
 # Docker-compose file for running the application Laravel
 
 services:
-  app1_laravel_mysql:
+  app_laravel_mysql:
     image: mysql
-    container_name: app1_laravel_mysql
+    container_name: app_laravel_mysql
     ports:
       - "3339:3306"
     environment:
@@ -12,29 +12,27 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: laravel
     volumes:
-      - app1_laravel_mysql_data:/var/lib/mysql
+      - app_laravel_mysql_data:/var/lib/mysql
     networks:
-      - app1_laravel_network
-  app1_laravel:
+      - app_laravel_network
+  app_laravel:
     depends_on:
-      - app1_laravel_mysql
+      - app_laravel_mysql
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app1_laravel
+    container_name: app_laravel
     ports:
       - "8089:80"
     environment:
-      DB_HOST: app1_laravel_mysql
-    volumes:
-      - ./app:/var/www/html/
+      DB_HOST: app_laravel_mysql
     networks:
-      - app1_laravel_network
+      - app_laravel_network
 
 volumes:
-  app1_laravel_mysql_data:
+  app_laravel_mysql_data:
     driver: local
 
 networks:
-  app1_laravel_network:
+  app_laravel_network:
     driver: bridge
