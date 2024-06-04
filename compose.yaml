@@ -27,7 +27,7 @@ services:
     environment:
       DB_HOST: app1_laravel_mysql
     volumes:
-      - ./app:/app
+      - ./app:/var/www/html/
     networks:
       - app1_laravel_network
 
