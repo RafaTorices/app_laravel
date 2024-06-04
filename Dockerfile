@@ -31,6 +31,10 @@ COPY ./app .
 RUN composer install --no-scripts
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/
+# Environment variables
+COPY ./app/.env.example .env
+# Generate key for Laravel
+RUN php artisan key:generate
 # Expose port 80
 EXPOSE 80
 # Start Apache
